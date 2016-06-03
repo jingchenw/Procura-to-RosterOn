@@ -2,8 +2,16 @@ import csv
 import time
 import sys
 
+print '----------------------------------------'
+print '|                                      |'
+print '|               WELCOME                |'
+print '|                v 1.1                 |'
+print '|                                      |'
+print '----------------------------------------'
+
+
 # Prompt to type in file directory
-print 'Welcome!\n'
+
 print 'Please confirm the raw data files have been put in the "input_files" folder.(Press Enter to continue)\n'
 sys.stdin.readline()
 
