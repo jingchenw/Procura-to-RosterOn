@@ -7,34 +7,45 @@ print 'Welcome!\n'
 print 'Please confirm the raw data files have been put in the "input_files" folder.(Press Enter to continue)\n'
 sys.stdin.readline()
 
-file_name = raw_input('Please type in the file name, without the file extension: ')
+# Import multiple files
+file_num_count = 0
+file_name = ['' for x in range(21)]
+print "Maximum import amount is 20! Press Enter to continue\n"
+sys.stdin.readline()
+while file_name[file_num_count-1] != 'exit':
+    file_name[file_num_count] = raw_input('Type in the file name, without the file extension, type exit to finish: ')
+    file_num_count += 1
+print file_name
+print file_num_count
+file_num_count -= 1
+print file_num_count
 
-# Open file for row counting
-print "Opening source file..."
-file_dir = 'input_files/'+str(file_name)+'.csv'
-csv_file = open(file_dir)
-csv_reader = csv.reader(csv_file)
-
-# Count the row
-print "Counting the rows..."
-data = list(csv_reader)
-row_count = len(data)
+# Counting total number of rows for all files
+print "Counting rows..."
+row_count = 0
+for num in range(file_num_count):
+    file_dir = 'input_files/' + str(file_name[num]) + '.csv'
+    csv_file = open(file_dir)
+    csv_reader = csv.reader(csv_file)
+    data = list(csv_reader)
+    row_count += len(data)
+print row_count
 
 # Create 2-D list
 print "Creating index..."
 raw_data = [['' for x in range(24)] for y in range(row_count)]
 
-# Open file for data mapping
-print "Mapping data..."
-csv_file = open(file_dir)
-csv_reader = csv.reader(csv_file)
-
 # Map data to list
+print "Mapping data..."
 row_number = 0
-for row in csv_reader:
-    for column_count in range(24):
-        raw_data[row_number][column_count] = row[column_count]
-    row_number += 1
+for num in range(file_num_count):
+    file_dir = 'input_files/' + str(file_name[num]) + '.csv'
+    csv_file = open(file_dir)
+    csv_reader = csv.reader(csv_file)
+    for row in csv_reader:
+        for column_count in range(24):
+            raw_data[row_number][column_count] = row[column_count]
+        row_number += 1
 
 # Change date format
 print "Changing date format..."
